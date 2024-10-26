@@ -12,6 +12,7 @@ app.get('/' ,(req:Request,res:Response)=>{
      res.send("hellow ")
 })
 app.post("/form", async (req:Request, res:Response) => {
+  console.log(req.body)
   try {
     const newEd = new Ed(req.body); 
     const savedEd = await newEd.save(); 

@@ -3,9 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Rocket } from "lucide-react";
 import axios from "axios";
-import toast, {Toaster } from "react-hot-toast"
+import {  message } from "antd";
+
 function App() {
-  <Toaster/>
+  
 
   const logos = [
     "https://imgs.search.brave.com/ioQuV23ytz_9ts_6r1XaMpCGTTbpPC_OxYYYR4sLhJM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pY29u/YXBlLmNvbS93cC1j/b250ZW50L3BuZ19s/b2dvX3ZlY3Rvci9k/ZWxoaS1wdWJsaWMt/c2Nob29sLW1hbmRh/d2EtbG9nby5wbmc",
@@ -39,17 +40,18 @@ function App() {
   });
 
   const onSubmit = async (values: any) => {
-    console.log(values);
+    console.log(values)
+  
     try {
       const res = await axios.post("https://ed-1-tkuz.onrender.com/form", {
         values,
       });
       if (res) {
-         toast.success("User registered successfully")
+         message.success("User registered successfully")
       }
     } catch (err) {
       console.log(err)
-      toast.error("error occured")
+      message.error("error occured")
     }
   };
   return (
