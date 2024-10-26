@@ -61,43 +61,43 @@ function App() {
   return (
     <div className="h-full overflow-auto">
       <div className="flex flex-col h-full bg-blue-950">
-      <div className="flex justify-between items-center p-2 bg-blue-900 pr-[140px] relative">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/socialmedia-5a9a9.appspot.com/o/Full%20logo%20all%20white.png?alt=media&token=39bd55c8-30c2-4f44-9d96-fdea41f45654"
-        className="h-10"
-      />
+      <div className="flex justify-between items-center p-3 bg-blue-900 pr-[140px] fixed top-0 left-0 w-full z-10">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/socialmedia-5a9a9.appspot.com/o/Full%20logo%20all%20white.png?alt=media&token=39bd55c8-30c2-4f44-9d96-fdea41f45654"
+    alt="Logo"
+    className="h-10"
+  />
+  
+  <div className="block lg:hidden">
+    <button onClick={toggleMenu} className="text-white">
+      {isOpen ? (
+        <XMarkIcon className="h-6 w-6" />
+      ) : (
+        <Bars3Icon className="h-6 w-6" />
+      )}
+    </button>
+  </div>
 
-      
-      <div className="block lg:hidden">
-        <button onClick={toggleMenu} className="text-white">
-          {isOpen ? (
-            <XMarkIcon className="h-6 w-6" />
-          ) : (
-            <Bars3Icon className="h-6 w-6" />
-          )}
-        </button>
-      </div>
+  <div className={`flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-10 ${isOpen ? 'block' : 'hidden'} lg:block`}>
+    <a href="#" className="text-white hover:underline">
+      Products
+    </a>
+    <a href="#" className="text-white hover:underline">
+      About Us
+    </a>
+    <a href="#" className="text-white hover:underline">
+      Contact
+    </a>
+    <button className="bg-white text-blue-800 px-4 py-2 hover:bg-blue-100 w-[180px] rounded-full">
+      Download App
+    </button>
+    <button className="border border-white text-white px-4 py-2 hover:bg-blue-600 w-[180px] rounded-full">
+      Talk to an Expert
+    </button>
+  </div>
+</div>
 
-      {/* Navbar Links */}
-      <div className={`flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-10 ${isOpen ? 'block' : 'hidden'} lg:block`}>
-        <a href="#" className="text-white">
-          Products
-        </a>
-        <a href="#" className="text-white">
-          About us
-        </a>
-        <a href="#" className="text-white">
-          Contact
-        </a>
-        <button className="bg-white text-blue-800 px-4 py-2 hover:bg-blue-100 w-[180px] rounded-full">
-          Download app
-        </button>
-        <button className="border border-white text-white px-4 py-2 hover:bg-blue-600 w-[180px] rounded-full">
-          Talk to an expert
-        </button>
-      </div>
-    </div>
-        <div className="flex-grow">
+        <div className="flex-grow mt-[60px]">
           <div
             className="relative text-white py-5 px-4 h-[650px] mw-full mx-auto"
             style={{
