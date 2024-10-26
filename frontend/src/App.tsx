@@ -4,9 +4,13 @@ import { useForm } from "react-hook-form";
 import { Rocket } from "lucide-react";
 import axios from "axios";
 import {  message } from "antd";
-
+import { useState } from "react";
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 function App() {
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const logos = [
     "https://imgs.search.brave.com/ioQuV23ytz_9ts_6r1XaMpCGTTbpPC_OxYYYR4sLhJM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pY29u/YXBlLmNvbS93cC1j/b250ZW50L3BuZ19s/b2dvX3ZlY3Rvci9k/ZWxoaS1wdWJsaWMt/c2Nob29sLW1hbmRh/d2EtbG9nby5wbmc",
@@ -57,30 +61,42 @@ function App() {
   return (
     <div className="h-full overflow-auto">
       <div className="flex flex-col h-full bg-blue-950">
-        <div className="flex justify-between items-center p-2 bg-blue-900 pr-[140px]">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/socialmedia-5a9a9.appspot.com/o/Full%20logo%20all%20white.png?alt=media&token=39bd55c8-30c2-4f44-9d96-fdea41f45654"
-            className="h-10"
-          />
+      <div className="flex justify-between items-center p-2 bg-blue-900 pr-[140px] relative">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/socialmedia-5a9a9.appspot.com/o/Full%20logo%20all%20white.png?alt=media&token=39bd55c8-30c2-4f44-9d96-fdea41f45654"
+        className="h-10"
+      />
 
-          <div className="flex items-center space-x-10">
-            <a href="#" className="text-white">
-              Products
-            </a>
-            <a href="#" className="text-white">
-              About us
-            </a>
-            <a href="#" className="text-white">
-              Contact
-            </a>
-            <button className="bg-white text-blue-800 px-4 py-2  hover:bg-blue-100 w-[180px] rounded-full">
-              Download app
-            </button>
-            <button className="border border-white text-white px-4 py-2  hover:bg-blue-600 w-[180px] rounded-full  ">
-              Talk to an expert
-            </button>
-          </div>
-        </div>
+      
+      <div className="block lg:hidden">
+        <button onClick={toggleMenu} className="text-white">
+          {isOpen ? (
+            <XMarkIcon className="h-6 w-6" />
+          ) : (
+            <Bars3Icon className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+
+      {/* Navbar Links */}
+      <div className={`flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-10 ${isOpen ? 'block' : 'hidden'} lg:block`}>
+        <a href="#" className="text-white">
+          Products
+        </a>
+        <a href="#" className="text-white">
+          About us
+        </a>
+        <a href="#" className="text-white">
+          Contact
+        </a>
+        <button className="bg-white text-blue-800 px-4 py-2 hover:bg-blue-100 w-[180px] rounded-full">
+          Download app
+        </button>
+        <button className="border border-white text-white px-4 py-2 hover:bg-blue-600 w-[180px] rounded-full">
+          Talk to an expert
+        </button>
+      </div>
+    </div>
         <div className="flex-grow">
           <div
             className="relative text-white py-5 px-4 h-[650px] mw-full mx-auto"
