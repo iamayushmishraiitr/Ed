@@ -15,7 +15,7 @@ app.post("/form", async (req:Request, res:Response) => {
   try {
     const newEd = new Ed(req.body); 
     const savedEd = await newEd.save(); 
-    res.status(201).json(savedEd); 
+    res.status(201).json("ho gaya"); 
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: "Internal server error" }); 

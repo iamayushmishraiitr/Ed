@@ -1,9 +1,12 @@
-import * as z from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Rocket } from "lucide-react"
-import axios from "axios"
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Rocket } from "lucide-react";
+import axios from "axios";
+import toast, {Toaster } from "react-hot-toast"
 function App() {
+  <Toaster/>
+
   const logos = [
     "https://imgs.search.brave.com/ioQuV23ytz_9ts_6r1XaMpCGTTbpPC_OxYYYR4sLhJM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pY29u/YXBlLmNvbS93cC1j/b250ZW50L3BuZ19s/b2dvX3ZlY3Rvci9k/ZWxoaS1wdWJsaWMt/c2Nob29sLW1hbmRh/d2EtbG9nby5wbmc",
     "https://imgs.search.brave.com/0dRj_9Eu22f75a9-h3B6thUvQHbFcxyRdxlp85G3jw8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL1Mvc3QtbWFy/eS1zLWhpZ2gtc2No/b29sLWxvZ28tQjdG/RkI4OEZFRi1zZWVr/bG9nby5jb20ucG5n",
@@ -17,8 +20,12 @@ function App() {
     email: z.string().email("Invalid email address"),
     phoneNumber: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits"),
     message: z.string().min(10, "Message must be at least 10 characters"),
-  })
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       lastName: "",
@@ -29,16 +36,22 @@ function App() {
       phoneNumber: "",
       message: "",
     },
-  })
+  });
 
-  const onSubmit = (values:any) => {
-    console.log(values)
-    axios.post("https://ed-1-tkuz.onrender.com/form" ,{
-        values
-    })
-    
-    console.log(values)
-  }
+  const onSubmit = async (values: any) => {
+    console.log(values);
+    try {
+      const res = await axios.post("https://ed-1-tkuz.onrender.com/form", {
+        values,
+      });
+      if (res) {
+         toast.success("User registered successfully")
+      }
+    } catch (err) {
+      console.log(err)
+      toast.error("error occured")
+    }
+  };
   return (
     <div className="h-full overflow-auto">
       <div className="flex flex-col h-full bg-blue-950">
@@ -79,7 +92,7 @@ function App() {
           >
             <div className="w-full flex flex-col items-center mb-2 h-auto">
               <h1 className="mb-4 border bg-gradient-to-t from-[#a69536] to-[#483c19]  w-[300px] rounded-full text-center p-2 shadow-lg">
-              School {'<>'} Teachers {'<>'} Parents
+                School {"<>"} Teachers {"<>"} Parents
               </h1>
               <h1 className="text-3xl md:text-6xl mb-4 bg-gradient-to-b from-[#a39858] h-[130px] to-[#FFECB3] bg-clip-text text-transparent text-center shadow-md">
                 Powering K12 with new- <br /> age SAAS.
@@ -169,72 +182,102 @@ function App() {
               <h2 className="text-3xl font-bold text-white mb-6">
                 Get Ready to board the <br></br> Rocket!
               </h2>
-         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-[400px] ">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <input
-                placeholder="First Name"
-                {...register("firstName")}
-                className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-              />
-              {errors.firstName && <span className="text-red-300">{errors.firstName.message}</span>}
-            </div>
-            <div>
-              <input
-                placeholder="Last Name"
-                {...register("lastName")}
-                className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-              />
-              {errors.lastName && <span className="text-red-300">{errors.lastName.message}</span>}
-            </div>
-          </div>
-          <div>
-            <input
-              placeholder="School Name"
-              {...register("schoolName")}
-              className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-            />
-            {errors.schoolName && <span className="text-red-300">{errors.schoolName.message}</span>}
-          </div>
-          <div>
-            <input
-              placeholder="City"
-              {...register("city")}
-              className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-            />
-            {errors.city && <span className="text-red-300">{errors.city.message}</span>}
-          </div>
-          <div>
-            <input
-              placeholder="Email"
-              type="email"
-              {...register("email")}
-              className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-            />
-            {errors.email && <span className="text-red-300">{errors.email.message}</span>}
-          </div>
-          <div>
-            <input
-              placeholder="Phone Number"
-              type="tel"
-              {...register("phoneNumber")}
-              className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-            />
-            {errors.phoneNumber && <span className="text-red-300">{errors.phoneNumber.message}</span>}
-          </div>
-          <div>
-            <textarea
-              placeholder="Message"
-              {...register("message")}
-              className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
-            />
-            {errors.message && <span className="text-red-300">{errors.message.message}</span>}
-          </div>
-          
-          <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white p-2 rounded flex items-center justify-center">
-            Send it to the moon <Rocket className="ml-2 h-4 w-4" />
-          </button>
-        </form>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-4 w-[400px] "
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <input
+                      placeholder="First Name"
+                      {...register("firstName")}
+                      className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                    />
+                    {errors.firstName && (
+                      <span className="text-red-300">
+                        {errors.firstName.message}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <input
+                      placeholder="Last Name"
+                      {...register("lastName")}
+                      className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                    />
+                    {errors.lastName && (
+                      <span className="text-red-300">
+                        {errors.lastName.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <input
+                    placeholder="School Name"
+                    {...register("schoolName")}
+                    className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                  />
+                  {errors.schoolName && (
+                    <span className="text-red-300">
+                      {errors.schoolName.message}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <input
+                    placeholder="City"
+                    {...register("city")}
+                    className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                  />
+                  {errors.city && (
+                    <span className="text-red-300">{errors.city.message}</span>
+                  )}
+                </div>
+                <div>
+                  <input
+                    placeholder="Email"
+                    type="email"
+                    {...register("email")}
+                    className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                  />
+                  {errors.email && (
+                    <span className="text-red-300">{errors.email.message}</span>
+                  )}
+                </div>
+                <div>
+                  <input
+                    placeholder="Phone Number"
+                    type="tel"
+                    {...register("phoneNumber")}
+                    className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                  />
+                  {errors.phoneNumber && (
+                    <span className="text-red-300">
+                      {errors.phoneNumber.message}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Message"
+                    {...register("message")}
+                    className="w-full bg-blue-600 border border-blue-500 placeholder-blue-300 text-white p-2 rounded-lg"
+                  />
+                  {errors.message && (
+                    <span className="text-red-300">
+                      {errors.message.message}
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white p-2 rounded flex items-center justify-center"
+                >
+                  Send it to the moon <Rocket className="ml-2 h-4 w-4" />
+                </button>
+              </form>
             </div>
           </div>
         </div>
