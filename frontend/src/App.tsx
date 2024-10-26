@@ -1,7 +1,13 @@
 function App() {
+  const logos = [
+    "https://imgs.search.brave.com/ioQuV23ytz_9ts_6r1XaMpCGTTbpPC_OxYYYR4sLhJM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pY29u/YXBlLmNvbS93cC1j/b250ZW50L3BuZ19s/b2dvX3ZlY3Rvci9k/ZWxoaS1wdWJsaWMt/c2Nob29sLW1hbmRh/d2EtbG9nby5wbmc",
+    "https://imgs.search.brave.com/0dRj_9Eu22f75a9-h3B6thUvQHbFcxyRdxlp85G3jw8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL1Mvc3QtbWFy/eS1zLWhpZ2gtc2No/b29sLWxvZ28tQjdG/RkI4OEZFRi1zZWVr/bG9nby5jb20ucG5n",
+    "https://imgs.search.brave.com/KXdw65AeW6pFOkP336Rw8haEzWGeWGBDuxgjlEUirJA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU1/MzY4ZWM0ZTRiMGU1/Y2IwYWI4ZjNjMC8x/NTIzODkxODg3NzIw/LUlQMFdJQzhDWkI3/RjIySFBKSDlWL1NN/Uytsb2dvK25ldysx/LnBuZw",
+  ];
+
   return (
     <div className="h-full overflow-auto">
-      <div className="flex flex-col h-full bg-blue-900">
+      <div className="flex flex-col h-full bg-blue-950">
         <div className="flex justify-between items-center p-2 bg-blue-900 pr-[140px]">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/socialmedia-5a9a9.appspot.com/o/Full%20logo%20all%20white.png?alt=media&token=39bd55c8-30c2-4f44-9d96-fdea41f45654"
@@ -37,11 +43,11 @@ function App() {
               backgroundRepeat: "no-repeat",
             }}
           >
-            <div className="w-full flex flex-col items-center">
-              <h1 className="mb-4 border border-yellow-100 w-[300px] rounded-full text-center p-2 shadow-lg">
+            <div className="w-full flex flex-col items-center mb-2 h-auto">
+              <h1 className="mb-4 border bg-gradient-to-t from-[#a69536] to-[#483c19]  w-[300px] rounded-full text-center p-2 shadow-lg">
                 School . Teachers . Parents
               </h1>
-              <h1 className="text-3xl md:text-6xl mb-4 text-yellow-200 text-center shadow-md">
+              <h1 className="text-3xl md:text-6xl mb-4 bg-gradient-to-b from-[#a39858] h-[130px] to-[#FFECB3] bg-clip-text text-transparent text-center shadow-md">
                 Powering K12 with new- <br /> age SAAS.
               </h1>
             </div>
@@ -53,30 +59,44 @@ function App() {
                 Talk to an expert
               </button>
             </div>
+            <div className="flex justify-center mt-4">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/-USKUNpg9_A"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full max-w-[560px] rounded-lg shadow-lg"
+              ></iframe>
+            </div>
           </div>
 
-          <section className="bg-blue-600 py-16 px-4">
+          <div className="bg-blue-950 py-16 px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
               <p className="mb-4">
                 Trusted by Teachers at over 1,000 of the India's leading Schools
               </p>
               <div className="flex justify-center space-x-8">
-                {[1, 2, 3].map((_, index) => (
-                  <div
+                {logos.map((logo, index) => (
+                  <img
                     key={index}
+                    src={logo}
+                    alt={`Logo ${index + 1}`}
                     className="bg-white w-16 h-16 rounded-full"
-                  ></div>
+                  />
                 ))}
               </div>
             </div>
-          </section>
-          <section className="bg-blue-600 py-16 px-4">
+          </div>
+          <div className="bg-blue-950 py-13 px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-white text-center mb-12">
-                Features that work for your future.
+                Features that <br></br> work for your <br></br> future.
               </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-blue-700 text-white p-6 rounded-lg">
+              <div className="grid md:grid-cols-2 gap-8 ">
+                <div className="bg-blue-800 text-white p-6 rounded-lg shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]">
                   <h3 className="text-xl font-semibold mb-2">
                     Reports Dashboard
                   </h3>
@@ -92,7 +112,7 @@ function App() {
                     View dashboard
                   </a>
                 </div>
-                <div className="bg-blue-700 text-white p-6 rounded-lg">
+                <div className="bg-blue-800 text-white p-6 rounded-lg shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]">
                   <h3 className="text-xl font-semibold mb-2">AI Attendance</h3>
                   <p className="text-sm">
                     Our AI-powered attendance system streamlines the process,
@@ -108,10 +128,10 @@ function App() {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          <section className="bg-blue-600 py-16 px-4">
-            <div className="max-w-md mx-auto bg-blue-700 rounded-lg p-8">
+          <div className="bg-blue-950 py-16 px-4">
+            <div className="max-w-md mx-auto bg-blue-800 rounded-lg p-8 shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]">
               <h2 className="text-2xl font-bold text-white mb-6">
                 Get Ready to board the Rocket!
               </h2>
@@ -151,10 +171,10 @@ function App() {
                 </button>
               </form>
             </div>
-          </section>
+          </div>
         </div>
 
-        <footer className="bg-blue-700 text-white py-8 px-4">
+        <footer className="bg-blue-900 text-white py-8 px-4">
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="font-semibold mb-2">Contact</h3>
